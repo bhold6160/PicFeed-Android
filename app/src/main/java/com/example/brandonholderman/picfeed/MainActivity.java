@@ -3,14 +3,17 @@ package com.example.brandonholderman.picfeed;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -20,8 +23,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import static android.R.attr.data;
@@ -56,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
         mPickPictureButton = (Button) findViewById(R.id.pick_picture);
         mDownloadPictureButton = (Button) findViewById(R.id.download_picture);
 
-        mImageUrls = MockDatabase.allImages;
-        mImageList = (ListView) findViewById(R.id.imageList);
+        mImageUrls = Database.allImages;
+        mImageList = (ListView) findViewById(R.id.image_list);
         mAdapter = new ImageAdapter(this, R.layout.image_item, mImageUrls);
-        mImageList.setAdapter(mAdapter)
+        mImageList.setAdapter(mAdapter);
 
         attachClickHandlers();
     }
@@ -106,9 +112,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void takePicture() {
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        if (intent.resolveActivity(getPackageManager()) != null) {
-//            startActivityForResult(intent, 0);
 
             try {
                 File imageFile = createImageFile();
@@ -134,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void downloadPicture() {
+        String url = Database.image1;
+        (new DownloadImageTask(this, url, mImageResult)).execute();
     }
 
     private File createImageFile() throws IOException {
