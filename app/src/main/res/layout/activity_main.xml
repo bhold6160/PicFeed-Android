@@ -8,6 +8,7 @@
         android:id="@+id/info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/take_picture"
         android:text="Take Picture"
@@ -21,10 +22,11 @@
         android:text="@string/pick_picture" />
 
     <Button
-        android:id="@+id/download_picture"
+        android:id="@+id/download_button"
         android:text="Download Picture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <ImageView
         android:id="@+id/image_result"
         android:layout_width="match_parent"

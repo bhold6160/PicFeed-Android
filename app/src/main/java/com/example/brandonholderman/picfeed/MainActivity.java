@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         mInfo = (TextView) findViewById(R.id.info);
         mTakePictureButton = (Button) findViewById(R.id.take_picture);
         mPickPictureButton = (Button) findViewById(R.id.pick_picture);
-        mDownloadPictureButton = (Button) findViewById(R.id.download_picture);
+        mDownloadPictureButton = (Button) findViewById(R.id.download_button);
 
         mImageUrls = Database.allImages;
         mImageList = (ListView) findViewById(R.id.image_list);

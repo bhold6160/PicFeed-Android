@@ -31,10 +31,10 @@ public class ImageAdapter extends ArrayAdapter<String> {
             convertView = LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
         }
 
-        ImageView image = convertView.findViewById(R.id.download_picture);
+        ImageView image = convertView.findViewById(R.id.download_image);
         String url = mUrls.get(position);
 
-//        (new DownloadImageTask(mContext, url, image)).execute();
+        (new DownloadImageTask(mContext, url, image)).execute();
 
         return convertView;
     }
